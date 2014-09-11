@@ -1,11 +1,21 @@
 <!doctype html>
-<html ng-app>
+<html ng-app="myApp">
   <head>
     <title>My Angular App</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
   </head>
 
   <body>
-
+  
+    <div ng-controller="MyController">Hello {{greetMe}}</div>
+    
+    <script type="lang/javascript">
+      function() {
+        var app = angular.module('myApp', []);
+        var controller = controller('MyController', function ($scope) {
+          $scope.greetMe = 'World';
+        });
+      }();
+    </script>
   </body>
 </html>
