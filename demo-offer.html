@@ -2,20 +2,285 @@
 <html ng-app="myApp">
   <head>
     <title>My Angular App</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.min.js"></script>
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css"></link>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.css"></link>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
   </head>
 
   <body>
   
-    <div ng-controller="MyController">Hello {{greetMe}}</div>
+    <div ng-controller="OfferController">Hello {{greetMe}} : {{offerLabel}}</div>
     
-    <script type="lang/javascript">
-      function() {
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Offre Jet</h3>
+          <div>
+            <p>Choose plan</p>
+            <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Plan</th>
+                <th>Engagement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>mensuel</td>
+                <td>10 &euro; par mois</td>
+                <td>1 an</td>
+              </tr>
+              <tr>
+                <td>annuel</td>
+                <td>120 &euro; par an</td>
+                <td>-</td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Offer details</h4>
+          <div class="row">
+            <div class="col-sm-12">
+              <p class="label label-warning">Trafic</p>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="well">
+                    <p>Trafic 10 Giga</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Plan</th>
+                          <th>Engagement</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>mensuel</td>
+                          <td>10 &euro; par mois</td>
+                          <td>1 an</td>
+                        </tr>
+                        <tr>
+                          <td>annuel</td>
+                          <td>120 &euro; par an</td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="well">
+                    <p>Trafic 30 Giga</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Plan</th>
+                          <th>Engagement</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>mensuel</td>
+                          <td>25 &euro; par mois</td>
+                          <td>1 an</td>
+                        </tr>
+                        <tr>
+                          <td>annuel</td>
+                          <td>300 &euro; par an</td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <hr></hr>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <p class="label label-warning">Voix sur IP</p>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="well">
+                    <p>France Illimit&eacute;</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Plan</th>
+                          <th>Engagement</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>mensuel</td>
+                          <td>10 &euro; par mois</td>
+                          <td>1 an</td>
+                        </tr>
+                        <tr>
+                          <td>annuel</td>
+                          <td>120 &euro; par an</td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="well">
+                    <p>France Illimit&eacute; et International</p>
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Plan</th>
+                          <th>Engagement</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>mensuel</td>
+                          <td>10 &euro; par mois</td>
+                          <td>1 an</td>
+                        </tr>
+                        <tr>
+                          <td>annuel</td>
+                          <td>120 &euro; par an</td>
+                          <td>-</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function() {
         var app = angular.module('myApp', []);
-        var controller = controller('MyController', function ($scope) {
-          $scope.greetMe = 'World';
+
+        var offer = app.factory('Catalog', function() {
+          var offer = {
+            offer: function() {
+              return {
+                label: "Offre Jet",
+                code: 'jet',
+                details: [ {
+                  code: 'trafic',
+                  label: 'Trafic',
+                  choices: [ {
+                    label: 'Trafic 10 Giga',
+                    code: 'jet10g',
+                    tarifs: [{
+                      plan: 'mensuel',
+                      prix: 10,
+                      periode: 1
+                    }, {
+                      plan: 'annuel',
+                      prix: 120,
+                      periode: 12
+                    }],
+                  }, {
+                    label: 'Trafic 30 Giga',
+                    code: 'jet30g',
+                    tarifs: [{
+                      plan: 'mensuel',
+                      prix: 25,
+                      periode: 1
+                    }, {
+                      plan: 'annuel',
+                      prix: 300,
+                      periode: 12
+                    }],
+                  }]
+                }]
+              };
+            }
+          };
+          return offer;
         });
-      }();
+
+        function DraftOfferLine(offerCode) {
+          this.code = offerCode;
+          this.details = {};
+
+          this.chosenDetail = function(detailCode, choiceCode, plan) {
+            this.details[detailCode] = {
+              choice: {
+                code: choiceCode
+              },
+              plan: {
+                code: plan
+              }
+            }
+          }
+        }
+
+        function Draft() {
+          this.lines = [];
+
+          this.newOfferLine = function(offerCode) {
+            this.lines.push(new DraftOfferLine(offerCode));
+          }
+
+          this.firstLine = function() {
+            return this.lines[0];
+          }
+        }
+
+        var draft = app.factory('MyDraft', function() {
+          var draft = new Draft();
+          draft.newOfferLine('jet');
+          
+          return draft;
+        });
+
+
+
+        var controller = app.controller('OfferController', function ($scope, Catalog, MyDraft) {
+          $scope.greetMe = 'World';
+
+          var offer = Catalog.offer();
+          var draft = MyDraft.firstLine();
+
+          var refresh = function ($scope, offer, draft) {
+            $scope.offerLabel = offer.label;
+
+
+            $scope.details = _.map(offer.details, function(detail) {
+              var displayDetail = _.clone(detail);
+
+            });
+          }
+
+          refresh($scope, offer);
+        });
+      }());
     </script>
   </body>
 </html>
