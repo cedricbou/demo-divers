@@ -1,27 +1,27 @@
 <!doctype html>
 <html ng-app="myApp">
-  <head>
-    <title>My Angular App</title>
+<head>
+  <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css"></link>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.css"></link>
+  <title>My Angular App</title>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap.css"></link>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/css/bootstrap-theme.css"></link>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
-  </head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-  <body>
-  
-    <div ng-controller="OfferController">Hello {{greetMe}} : {{offerLabel}}</div>
-    
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.24/angular.js"></script>
 
-    <div class="container">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
+</head>
+
+<body>
+
+    <div ng-controller="OfferController" class="container">
       <div class="row">
         <div class="col-md-12">
-          <h3>Offre Jet</h3>
+          <h3><p class="bg-danger">{{offerLabel}}</p></h3>
           <div>
             <p>Choose plan</p>
             <table class="table">
@@ -33,15 +33,10 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>mensuel</td>
-                <td>10 &euro; par mois</td>
-                <td>1 an</td>
-              </tr>
-              <tr>
-                <td>annuel</td>
-                <td>120 &euro; par an</td>
-                <td>-</td>
+              <tr ng-repeat="plan in plans">
+                <td>{{plan.plan}}</td>
+                <td>{{plan | prix}}</td>
+                <td>{{plan | engagement}}</td>
               </tr>
             </tbody>
             </table>
@@ -50,14 +45,13 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <h4>Offer details</h4>
-          <div class="row">
+          <div class="row" ng-repeat="detail in details" >
             <div class="col-sm-12">
-              <p class="label label-warning">Trafic</p>
-              <div class="row">
+              <h4><p class="bg-success">{{detail.label}}</p></h4>
+              <div class="row" ng-repeat="choice in detail.choices">
                 <div class="col-xs-12">
                   <div class="well">
-                    <p>Trafic 10 Giga</p>
+                    <h5><p class="label label-info">{{choice.label}}</p></h5>
                     <table class="table">
                       <thead>
                         <tr>
@@ -67,107 +61,10 @@
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>mensuel</td>
-                          <td>10 &euro; par mois</td>
-                          <td>1 an</td>
-                        </tr>
-                        <tr>
-                          <td>annuel</td>
-                          <td>120 &euro; par an</td>
-                          <td>-</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="well">
-                    <p>Trafic 30 Giga</p>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Plan</th>
-                          <th>Engagement</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>mensuel</td>
-                          <td>25 &euro; par mois</td>
-                          <td>1 an</td>
-                        </tr>
-                        <tr>
-                          <td>annuel</td>
-                          <td>300 &euro; par an</td>
-                          <td>-</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <hr></hr>
-
-          <div class="row">
-            <div class="col-sm-12">
-              <p class="label label-warning">Voix sur IP</p>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="well">
-                    <p>France Illimit&eacute;</p>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Plan</th>
-                          <th>Engagement</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>mensuel</td>
-                          <td>10 &euro; par mois</td>
-                          <td>1 an</td>
-                        </tr>
-                        <tr>
-                          <td>annuel</td>
-                          <td>120 &euro; par an</td>
-                          <td>-</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12">
-                  <div class="well">
-                    <p>France Illimit&eacute; et International</p>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Plan</th>
-                          <th>Engagement</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>mensuel</td>
-                          <td>10 &euro; par mois</td>
-                          <td>1 an</td>
-                        </tr>
-                        <tr>
-                          <td>annuel</td>
-                          <td>120 &euro; par an</td>
-                          <td>-</td>
+                        <tr ng-repeat="plan in choice.tarifs">
+                          <td>{{plan.plan}}</td>
+                          <td>{{plan | prix}}</td>
+                          <td>{{plan | engagement}}</td>
                         </tr>
                       </tbody>
                     </table>
@@ -190,6 +87,17 @@
               return {
                 label: "Offre Jet",
                 code: 'jet',
+                tarifs: [{
+                      plan: 'mensuel',
+                      prix: 10,
+                      periode: 1,
+                      engagement: 12
+                    }, {
+                      plan: 'annuel',
+                      prix: 120,
+                      periode: 12
+                    }],
+
                 details: [ {
                   code: 'trafic',
                   label: 'Trafic',
@@ -217,6 +125,24 @@
                       prix: 300,
                       periode: 12
                     }],
+                  }]
+                }, {
+                  code: 'voip',
+                  label: 'Téléphonie',
+                  choices: [ {
+                    label: 'Téléphonie France Illimitée',
+                    code: 'voip.fr',
+                    tarifs: [{
+                      plan: 'inclu'
+                    }]
+                  }, {
+                    label: 'Téléphonie Fixe et Mobile de France Illimitée',
+                    code: 'voip.fr_mobile',
+                    tarifs: [{
+                      plan: 'chaque_mois',
+                      prix: '7',
+                      periode: 1,
+                    }]
                   }]
                 }]
               };
@@ -262,8 +188,29 @@
 
 
 
-        var controller = app.controller('OfferController', function ($scope, Catalog, MyDraft) {
-          $scope.greetMe = 'World';
+        var controller = app
+          .filter('prix', function() {
+            return function(plan) {
+              if(plan.prix) {
+                var per = '';
+                if(plan.periode) { 
+                  if(plan.periode == 1) { per = ' par mois'; }
+                  else if(plan.periode == 12) { per = ' par an'; }
+                  else if(plan.periode == 3) { per = ' par trimestre'; }
+                  else if(plan.periode == 6) { per = ' par semestre'; }
+                  else { per = ' pour ' + plan.periode + ' mois'; }
+                }
+                return plan.prix + " €" + (per?per:'');
+              }
+              return 'Inclu';
+             };
+           })
+          .filter('engagement', function() {
+            return function(plan) {
+              return plan.engagement?(plan.engagement + ' mois'):'sans engagement';
+            };
+          })
+          .controller('OfferController', function ($scope, Catalog, MyDraft) {
 
           var offer = Catalog.offer();
           var draft = MyDraft.firstLine();
@@ -271,10 +218,11 @@
           var refresh = function ($scope, offer, draft) {
             $scope.offerLabel = offer.label;
 
+            $scope.plans = offer.tarifs;
 
             $scope.details = _.map(offer.details, function(detail) {
               var displayDetail = _.clone(detail);
-
+              return displayDetail;
             });
           }
 
